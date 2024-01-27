@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Include Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+  <title>Login Form</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-form {
+      max-width: 500px;
+      width: 350px;
+      padding: 20px;
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+<div>
+  <section class="login-form p-5 md:p-8">
+    <h2 class="text-2xl font-bold mb-6">Login</h2>
+  
+    <!-- Mobile Number Input -->
+    <div id="mobileNumberContainer" class="mb-4">
+      <label for="mobile" class="block text-sm font-medium text-gray-600">Mobile Number</label>
+      <input type="tel" id="mobile" name="mobile" placeholder="Enter your mobile number"
+        class="mt-1 p-2 w-full border rounded-md">
+    </div>
+  
+    <!-- User name Input -->
+    <div id="userIdContainer" class="mb-4 hidden">
+      <label for="userId" class="block text-sm font-medium text-gray-600">User Id</label>
+      <input type="text" id="userId" name="UserId" placeholder="Enter your User id"
+        class="mt-1 p-2 w-full border rounded-md">
+    </div>
+  
+    <!-- Password Input -->
+    <div class="mb-4">
+      <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password"
+        class="mt-1 p-2 w-full border rounded-md">
+    </div>
+  
+    <!-- Login Button -->
+    <button class="bg-blue-500 text-white p-2 rounded-md w-full">Login</button>
+  
+    <!-- Switch to Username and Password Option -->
+    <p id="UserPrefernceForLogin" class="mt-4 text-sm text-gray-600">Prefer username and password?.</p>
+    <a class="cursor-pointer text-blue-500 text-sm" id="clickForUserPrefernce">Click
+      here</a>
+  </section>
+  <!-- 2 Factor Authentication  Page  -->
+  <section id="pinSection" class="hidden login-form p-5 md:p-8 mt-8">
+    <h2 class="text-2xl font-bold mb-6">Enter 4-Digit PIN</h2>
+  
+    <!-- PIN Input -->
+    <div class="mb-4">
+      <label for="pin" class="block text-sm font-medium text-gray-600">PIN</label>
+      <input type="password" id="pin" name="pin" placeholder="Enter your 4-digit PIN"
+        class="mt-1 p-2 w-full border rounded-md">
+    </div>
+  
+    <!-- Submit PIN Button -->
+    <button id="submitPinButton" class="bg-blue-500 text-white p-2 rounded-md w-full">Submit PIN</button>
+  </section>
+</div>
+<script type="module" src="./dist/login.nomin.js"></script>
+
+</body>
+
+</html>
