@@ -1,36 +1,37 @@
 import Defines from "../constants/defines";
 import Helper from "../helper/helper";
 
-class EventHelper{
-constructor(){
-}
- userLoginPrefenceEventExecute () {
+class EventHelper {
+  constructor() {}
+  static userLoginPrefenceEventExecute() {
     const MobileContainerStatus = Helper.hasClass(
-      "mobileNumberContainer",
-      "hidden"
+      Defines.mobileNumberContainerID,
+      Defines.hiddenClassName
     );
     const UserIdContainerStatus = Helper.hasClass(
-      "userIdContainer",
-      "hidden"
+      Defines.userIdContainerID,
+      Defines.hiddenClassName
     );
 
     if (!MobileContainerStatus) {
-      Helper.addClass("mobileNumberContainer", "hidden");
-      Helper.removeClass("userIdContainer", "hidden");
+      Helper.addClass(Defines.mobileNumberContainerID, Defines.hiddenClassName);
+      Helper.removeClass(Defines.userIdContainerID, Defines.hiddenClassName);
       Helper.setInnerHtml(
-        "UserPrefernceForLogin",
+        Defines.UserPrefernceForLoginID,
         Defines.userPrefernceMobile
       );
     } else {
-      Helper.addClass("userIdContainer", "hidden");
-      Helper.removeClass("mobileNumberContainer", "hidden");
+      Helper.addClass(Defines.userIdContainerID, Defines.hiddenClassName);
+      Helper.removeClass(
+        Defines.mobileNumberContainerID,
+        Defines.hiddenClassName
+      );
       Helper.setInnerHtml(
-        "UserPrefernceForLogin",
+        Defines.UserPrefernceForLoginID,
         Defines.userPrefernceUserId
       );
     }
-  };
+  }
 }
-
 
 export default EventHelper;

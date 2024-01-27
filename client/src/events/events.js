@@ -1,5 +1,6 @@
 import Helper from "../helper/helper.js";
 import EventHelper from "./eventHelper.js";
+import Defines from "../constants/defines.js";
 
 class Events {
   constructor(){
@@ -10,9 +11,9 @@ class Events {
   }
   userLoginPrefenceEvent() {
     Helper.addEvents(
-      "clickForUserPrefernce",
+      Defines.clickForUserPrefernceID,
       "click",
-      EventHelper.prototype.userLoginPrefenceEventExecute
+      EventHelper.userLoginPrefenceEventExecute
     );
   }
 }
