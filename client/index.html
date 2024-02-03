@@ -29,9 +29,8 @@
 
 <body>
 <div>
-  <section class="login-form p-5 md:p-8">
+  <section id="loginForm" class="login-form p-5 md:p-8">
     <h2 class="text-2xl font-bold mb-6">Login</h2>
-  
     <!-- Mobile Number Input -->
     <div id="mobileNumberContainer" class="mb-4">
       <label for="mobile" class="block text-sm font-medium text-gray-600">Mobile Number</label>
@@ -54,7 +53,7 @@
     </div>
   
     <!-- Login Button -->
-    <button class="bg-blue-500 text-white p-2 rounded-md w-full">Login</button>
+    <button id="loginButton" class="bg-blue-500 text-white p-2 rounded-md w-full">Login</button>
   
     <!-- Switch to Username and Password Option -->
     <p id="UserPrefernceForLogin" class="mt-4 text-sm text-gray-600">Prefer username and password?.</p>
@@ -74,6 +73,30 @@
   
     <!-- Submit PIN Button -->
     <button id="submitPinButton" class="bg-blue-500 text-white p-2 rounded-md w-full">Submit PIN</button>
+  </section>
+  
+  <!-- success Screen -->
+  <section id="successScreen" class=" hidden max-w-md w-full bg-white p-8 rounded-lg shadow-md text-center">
+    <div class="text-green-500 mb-6">
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        viewBox="0 0 24 24" class="w-16 h-16 mx-auto">
+        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+        <path d="M22 4L12 14.01l-3-3"></path>
+      </svg>
+    </div>
+    <p class="text-2xl font-bold text-gray-800 mb-4">Successfully logged in!</p>
+  </section>
+
+  <!-- Error Section -->
+  <section id="errorScreen" class="hidden max-w-md w-full bg-white p-8 rounded-lg shadow-md text-center">
+    <div class="text-red-500 mb-6">
+      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        viewBox="0 0 24 24" class="w-16 h-16 mx-auto">
+        <path d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </div>
+    <p class="text-2xl font-bold text-gray-800 mb-4">Oops! Something went wrong.</p>
+    <p class="text-red-500">Redirecting You to login Page in 5 secons</p>
   </section>
 </div>
 <script type="module" src="./dist/login.nomin.js"></script>
