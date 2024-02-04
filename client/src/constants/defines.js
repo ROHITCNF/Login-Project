@@ -10,10 +10,13 @@ const Defines = {
   submitPinButtonId: "submitPinButton",
   pinSectionId: "pinSection",
   loginFormId: "loginForm",
-  successScreenId : "successScreen",
-  errorScreenId : "errorScreen",
-  
+  successScreenId: "successScreen",
+  errorScreenId: "errorScreen",
+
   hiddenClassName: "hidden",
+
+  //APIs
+  loginAPi: "http://127.0.0.1:5000/loginUser",
 };
 
 export default Defines;
