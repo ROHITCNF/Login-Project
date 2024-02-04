@@ -34,10 +34,27 @@ class EventHelper {
       );
     }
   }
-  static LoginButtonClickEventExecute() {
+  static async LoginButtonClickEventExecute(event) {
+    event.preventDefault();
+    const mobileOrEmail = document.getElementById("mobile").value;
+    const passwordVal = document.getElementById("password").value;
+    document.getElementById("mobile").value = "";
+    document.getElementById("password").value = "";
+    console.log(mobileOrEmail, passwordVal);
+     const data = { mobile: mobileOrEmail, password: passwordVal };
+    const ApiData = await Helper.callAPI(Defines.loginAPi, "POST", data);
+    if(ApiData?.code === 200){
+      Helper.addClass(Defines.loginFormId, Defines.hiddenClassName);
+      Helper.removeClass(Defines.pinSectionId, Defines.hiddenClassName);
+    }
+    /*
+     Get the input from the Login inputs and call the login API.
+     On the successfull response get Do the following Operations
+    */
+
     //hide the Login and unhide the pin section
-    Helper.addClass(Defines.loginFormId, Defines.hiddenClassName);
-    Helper.removeClass(Defines.pinSectionId, Defines.hiddenClassName);
+
+  
   }
 
   static pinSubmitButtonClick() {

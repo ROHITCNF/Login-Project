@@ -25,6 +25,28 @@ class Helper {
   static addEvents(idName, eventname, callBackFunction) {
     this.getElementWithId(idName).addEventListener(eventname, callBackFunction);
   }
+
+  //API call
+ static async callAPI(URL,methodType,data=undefined) {
+  try {
+    let options = {
+      method: methodType,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    if (methodType === "POST" && data) {
+      options.body = JSON.stringify(data);
+    }
+
+    let responseData = await fetch(URL, options);
+    let parsedResponse = await responseData.json();
+    return parsedResponse;
+  } catch (error) {
+    console.log('Error:', error.message);
+  }
+};
 }
 
 export default Helper;

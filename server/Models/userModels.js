@@ -6,9 +6,9 @@ const userSchema = new Schema({
   firstname: { type: String, required: true },
   lastName: { type: String },
   email: { type: String, required: true, unique: true },
-  mobile:{type:Number , required:true,unique:true},
+  mobile: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  pin: { type: Number, required: true },
+  pin: { type: String, required: true },
   salt: { type: String },
   role: { type: String, enum: ["USER", "ADMIN"], default: "USER" },
 });
@@ -22,17 +22,40 @@ userSchema.pre("save", function (next) {
   const hashedPassword = createHmac("sha256", salt)
     .update(this.password)
     .digest("hex");
-  const hashedPin = createHmac("sha256", salt)
-    .update(this.pin)
-    .digest("hex");
-
+  const hashedPin = createHmac("sha256", salt).update(this.pin).digest("hex");
   this.salt = salt;
   this.password = hashedPassword;
   this.pin = hashedPin;
-  console.log('Password' , hashedPassword);
-  console.log("Pin", hashedPin);
   next();
 });
+
+//password matching function
+userSchema.static(
+  "matchPassword",
+  async function (uniqueUser, password, emailFlag, mobileFlag) {
+    //Since Mongoose don't accept dynamic Key change
+    //Hence we need to make Querry dynamic
+
+    let querry;
+    querry = emailFlag ? {'email':uniqueUser} : {'mobile':uniqueUser};
+    const user = await this.findOne(querry);
+    console.log("Logging user", user);
+    if (!user) return false;
+
+    const salt = user.salt;
+    const hashedPasswordInDb = user.password;
+    const hashedUserProvidedPassword = createHmac("sha256", salt)
+      .update(password)
+      .digest("hex");
+
+    if (hashedPasswordInDb === hashedUserProvidedPassword) {
+      //User Authenticated  1st F-A
+      return user;
+    } else {
+      return false;
+    }
+  }
+);
 
 // To use This Schema use this as a model
 const User = model("usersForLoginProjects", userSchema);
