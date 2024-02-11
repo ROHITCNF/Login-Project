@@ -29,7 +29,7 @@ const loginUser = async (req, res) => {
     let emailFlag = false;
     let mobileFlag = false;
     let userValidated;
-    if ("email" in req.body) {
+    if ("email" in req.body && req.body.email) {
       //search the userDetails with email
       emailFlag = true;
       const { email, password } = req.body;
@@ -39,7 +39,7 @@ const loginUser = async (req, res) => {
         emailFlag,
         mobileFlag
       );
-    } else if ("mobile" in req.body) {
+    } else if ("mobile" in req.body && req.body.mobile) {
       //search the userDetails with mobile
       const { mobile, password } = req.body;
       mobileFlag = true;
@@ -54,7 +54,10 @@ const loginUser = async (req, res) => {
       res.status(200).json({
         s: "ok",
         code: 200,
-        data: { firstname: userValidated?.firstname },
+        data: {
+          firstname: userValidated?.firstname,
+          emailId: userValidated?.email,
+        },
         message: "Uservalidated",
       });
     } else {
@@ -64,7 +67,28 @@ const loginUser = async (req, res) => {
     res.status(400).json({ s: "", code: 400, message: `${error}` });
   }
 };
+const verifyPin = async (req , res)=>{
+    try {
+      const { email, pin } = req.body;
+      const userValidated = await UserModel.matchPin(email , pin);
 
+      if (userValidated) {
+        res.status(200).json({
+          s: "ok",
+          code: 200,
+          data: {
+          },
+          message: "Pin Validated",
+        });
+      } else {
+        res
+          .status(400)
+          .json({ s: "", code: 400, message: "Pin is wrong" });
+      }
+    } catch (error) {
+      res.status(400).json({ s: "", code: 400, message: `${error}` });
+    }
+}
 const validateTokens = (req, res) => {};
 
 const verify_token = (req, res) => {};
@@ -76,4 +100,5 @@ module.exports = {
   validateTokens,
   verify_token,
   getUserId,
+  verifyPin,
 };
