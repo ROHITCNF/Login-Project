@@ -47,7 +47,7 @@ userSchema.static(
     const hashedUserProvidedPassword = createHmac("sha256", salt)
       .update(password)
       .digest("hex");
-
+    // 
     if (hashedPasswordInDb === hashedUserProvidedPassword) {
       //User Authenticated  1st F-A
       return user;
@@ -56,6 +56,32 @@ userSchema.static(
     }
   }
 );
+
+//pin matching function
+userSchema.static(
+  "matchPin",
+  async function (userEmail , userPin) {
+    //Since Mongoose don't accept dynamic Key change
+    //Hence we need to make Querry dynamic
+
+    const querry = { email: userEmail }; 
+    const user = await this.findOne(querry);
+    if (!user) return false;
+
+    const salt = user.salt;
+    const hashedPinInDb = user.pin;
+    const hashedUserProvidedPin = createHmac("sha256", salt)
+      .update(userPin)
+      .digest("hex");
+
+    if (hashedPinInDb === hashedUserProvidedPin) {
+      return user;
+    } else {
+      return false;
+    }
+  }
+);
+
 
 // To use This Schema use this as a model
 const User = model("usersForLoginProjects", userSchema);

@@ -8,6 +8,7 @@ router.post('/signupUser',ApiController.signupUser);
 
 //Login existing user
 router.post("/loginUser", ApiController.loginUser);
+router.post("/verify_pin", ApiController.verifyPin);
 
 //validateTokens (access + refresh)
 router.get("/validateTokens", ApiController.validateTokens);
